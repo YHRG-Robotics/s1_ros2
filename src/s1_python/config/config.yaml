@@ -1,0 +1,23 @@
+# 图像数组第一位为彩色图，第二位为深度图
+camera_publisher:
+  ros__parameters:
+    # 这里配置常规彩色图
+    # camera1_device: "/dev/camera_right_rgb"
+    camera1_device: "/dev/video4"
+    camera1_fps: 30
+    camera1_width: 480
+    camera1_height: 640
+    camera1_color_mode: "BGR"
+    # 这里配置深度图
+    # camera2_device: "/dev/camera_right_rgb"
+    camera2_device: "/dev/video9"
+    camera2_fps: 15
+    camera2_width: 480
+    camera2_height: 640
+    camera2_color_mode: "BGR"
+
+    camera3_device: "/dev/video7"
+    camera3_fps: 15
+    camera3_width: 480
+    camera3_height: 640
+    camera3_color_mode: "BGR"

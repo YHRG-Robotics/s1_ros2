@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="s1_description" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Gazebo colors -->
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name="black">
+    <color rgba="0.2 0.2 0.2 1"/>
+  </material>
+  <material name="gray">
+    <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1"/>
+  </material>
+
+  <!-- Transmissions for ros2_control -->
+  <xacro:macro name="transmission" params="joint_name">
+    <transmission name="${joint_name}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint_name}">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${joint_name}_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <!-- Gazebo plugin for ros2_control -->
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>$(find s1_gazebo)/config/ros2_controllers.yaml</parameters>
+      <controller_manager_name>controller_manager</controller_manager_name>
+    </plugin>
+  </gazebo>
+
+  <!-- Gazebo properties for all links -->
+  <gazebo reference="base_link">
+    <material>Gazebo/Gray</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="1_Link">
+    <material>Gazebo/Black</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="2_Link">
+    <material>Gazebo/White</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="3_Link">
+    <material>Gazebo/Gray</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="4_Link">
+    <material>Gazebo/Gray</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="5_Link">
+    <material>Gazebo/Gray</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="6_Link">
+    <material>Gazebo/Gray</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="7_Link">
+    <material>Gazebo/Gray</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="gripper_9_1_Link">
+    <material>Gazebo/Gray</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+  
+  <gazebo reference="gripper_9_2_Link">
+    <material>Gazebo/Gray</material>
+    <selfCollide>false</selfCollide>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+  </gazebo>
+
+  <!-- Add transmissions for ros2_control -->
+  <xacro:transmission joint_name="1joint"/>
+  <xacro:transmission joint_name="2joint"/>
+  <xacro:transmission joint_name="3joint"/>
+  <xacro:transmission joint_name="4joint"/>
+  <xacro:transmission joint_name="5joint"/>
+  <xacro:transmission joint_name="6joint"/>
+  <xacro:transmission joint_name="gripper_joint"/>
+  <xacro:transmission joint_name="gripper_joint_2"/>
+  <link name="world"/>
+    <joint name="fixed" type="fixed">
+      <parent link="world"/>
+      <child link="base_link"/>
+    </joint>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.00315616821002854 0.00120511934338464 0.0126116894909405"
+        rpy="0 0 0" />
+      <mass
+        value="10.509543320656255" />
+      <inertia
+        ixx="0.000707304187237443"
+        ixy="1.42159746309956E-07"
+        ixz="-1.30513870445304E-07"
+        iyy="0.000994088190964314"
+        iyz="7.57779006702876E-09"
+        izz="0.000364325874877072" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/base_link.STL" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+
+  <link
+    name="1_Link">
+    <inertial>
+      <origin
+        xyz="1.23405114324029E-05 -0.00428917013103167 0.0605476254012132"
+        rpy="0 0 0" />
+      <mass
+        value="0.219539513602391" />
+      <inertia
+        ixx="9.28541806319406E-05"
+        ixy="1.18792471971104E-11"
+        ixz="9.6953358165257E-09"
+        iyy="9.97550236059857E-05"
+        iyz="3.90194973983133E-07"
+        izz="9.46590737674372E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/1_Link.STL" />
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/1_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="1joint"
+    type="revolute">
+    <origin
+      xyz="-0.0083638 -0.012614 0.02515"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="1_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.967"
+      upper="2.967"
+      effort="9"
+      velocity="3" />
+  </joint>
+  <link
+    name="2_Link">
+    <inertial>
+      <origin
+        xyz="0.149265454858688 -8.19396226162533E-05 0.000771803836317185"
+        rpy="0 0 0" />
+      <mass
+        value="0.443053529090104" />
+      <inertia
+        ixx="0.000106963186783645"
+        ixy="-1.08866871322659E-05"
+        ixz="-3.38503693518254E-08"
+        iyy="0.00159752665939923"
+        iyz="-7.10999202118186E-09"
+        izz="0.00160636440792096" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/2_Link.STL" />
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/2_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="2joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0.066099"
+      rpy="1.5708 0 0" />
+    <parent
+      link="1_Link" />
+    <child
+      link="2_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="3.14"
+      effort="9"
+      velocity="3" />
+  </joint>
+  <link
+    name="3_Link">
+    <inertial>
+      <origin
+        xyz="0.0343542764390053 0.0922345594895663 -0.00118307558463807"
+        rpy="0 0 0" />
+      <mass
+        value="0.538961975283837" />
+      <inertia
+        ixx="0.000599951621976648"
+        ixy="-5.68061831570966E-05"
+        ixz="-2.09166924696912E-08"
+        iyy="0.000232773226909755"
+        iyz="1.24344585891257E-05"
+        izz="0.000677799637668055" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/3_Link.STL" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/3_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="3joint"
+    type="revolute">
+    <origin
+      xyz="0.3 0 0"
+      rpy="0 0 1.5708" />
+    <parent
+      link="2_Link" />
+    <child
+      link="3_Link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="3.4"
+      effort="9"
+      velocity="3" />
+  </joint>
+  <link
+    name="4_Link">
+    <inertial>
+      <origin
+        xyz="0.0399751611945108 0.0595067395209513 0.00427459978833223"
+        rpy="0 0 0" />
+      <mass
+        value="0.209930469275193" />
+      <inertia
+        ixx="7.77290136088297E-05"
+        ixy="4.99161244923017E-08"
+        ixz="1.33875494107831E-06"
+        iyy="6.63668590668454E-05"
+        iyz="2.28078101356353E-08"
+        izz="7.63825198092629E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/4_Link.STL" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/4_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="4joint"
+    type="revolute">
+    <origin
+      xyz="0.057 0.22 0"
+      rpy="0 0 0" />
+    <parent
+      link="3_Link" />
+    <child
+      link="4_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="3"
+      velocity="3" />
+  </joint>
+  <link
+    name="5_Link">
+    <inertial>
+      <origin
+        xyz="-0.00202900893934295 7.81689950761152E-06 -0.0521786606306489"
+        rpy="0 0 0" />
+      <mass
+        value="0.179231232430523" />
+      <inertia
+        ixx="6.78621501414178E-05"
+        ixy="1.09228077569469E-08"
+        ixz="8.33943443253673E-08"
+        iyy="5.69014377087721E-05"
+        iyz="-5.87224804519886E-09"
+        izz="6.44817460555691E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/5_Link.STL" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/5_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="5joint"
+    type="revolute">
+    <origin
+      xyz="0.06076 0.08 0"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="4_Link" />
+    <child
+      link="5_Link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="3"
+      velocity="3" />
+  </joint>
+  <link
+    name="6_Link">
+    <inertial>
+      <origin
+        xyz="-5.12935660635164E-07 0.000315932413881809 0.0584362637438339"
+        rpy="0 0 0" />
+      <mass
+        value="0.240928180233382" />
+      <inertia
+        ixx="6.9012891461221E-05"
+        ixy="1.8751992149904E-09"
+        ixz="-8.64676128716576E-11"
+        iyy="0.000150394404426466"
+        iyz="8.37442381438189E-08"
+        izz="0.000177816525457933" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/6_Link.STL" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/6_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="6joint"
+    type="revolute">
+    <origin
+      xyz="0.00025999 0 -0.06076"
+      rpy="1.5708 0 -1.5708" />
+    <parent
+      link="5_Link" />
+    <child
+      link="6_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="3"
+      velocity="3" />
+  </joint>
+  <link
+    name="7_Link">
+    <inertial>
+      <origin
+        xyz="-3.6949610038306E-16 -2.77555756156289E-15 0.0491021033864851"
+        rpy="0 0 0" />
+      <mass
+        value="0.0763456010030004" />
+      <inertia
+        ixx="2.77824058657415E-05"
+        ixy="1.02660125766616E-06"
+        ixz="1.08141257865585E-19"
+        iyy="2.02813767344387E-05"
+        iyz="1.97252871201249E-19"
+        izz="1.69656526984088E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/7_Link.STL" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/7_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="7joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0.0655"
+      rpy="0 0 0" />
+    <parent
+      link="6_Link" />
+    <child
+      link="7_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.047"
+      upper="1.047"
+      effort="3"
+      velocity="3" />
+  </joint>
+  
+  
+  <!-- 夹爪 9_1 部件 -->
+  <link
+    name="gripper_9_1_Link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.05" />
+      <inertia
+        ixx="0.0001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.0001"
+        iyz="0.0"
+        izz="0.0001" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/9_1_Link.STL" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/9_1_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 夹爪 9_2 部件 -->
+  <link
+    name="gripper_9_2_Link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.05" />
+      <inertia
+        ixx="0.0001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.0001"
+        iyz="0.0"
+        izz="0.0001" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/9_2_Link.STL" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find s1_description)/meshes/9_2_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <joint
+    name="gripper_joint"
+    type="prismatic">
+    <origin xyz="0.014 0.016 0.0355" /> 
+    <parent link="7_Link" />
+    <child link="gripper_9_1_Link" />
+    <axis xyz="1 0 0" /> 
+    <limit lower="0" upper="0.052" effort="3" velocity="1" />
+  </joint>
+
+  <joint
+    name="gripper_joint_2"
+    type="prismatic">
+    <origin xyz="-0.014 -0.016 0.0355" />
+    <parent link="7_Link" />
+    <child link="gripper_9_2_Link" />
+    <axis xyz="-1 0 0" /> 
+    <limit lower="0" upper="0.052" effort="3" velocity="1" />
+    <!-- <mimic joint="gripper_joint" multiplier="1.0" offset="0" /> -->
+  </joint>
+
+
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    
+    <xacro:macro name="arm_joint_interface" params="name">
+      <joint name="${name}">
+        <command_interface name="position">
+          <param name="min">$-3.14$</param>
+          <param name="max">$3.14$</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+    </xacro:macro>
+
+    <xacro:arm_joint_interface name="1joint"/>
+    <xacro:arm_joint_interface name="2joint"/>
+    <xacro:arm_joint_interface name="3joint"/>
+    <xacro:arm_joint_interface name="4joint"/>
+    <xacro:arm_joint_interface name="5joint"/>
+    <xacro:arm_joint_interface name="6joint"/>
+
+    <joint name="gripper_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    
+    <joint name="gripper_joint_2">
+      <!-- <param name="mimic">gripper_joint</param>
+      <param name="multiplier">1.0</param> -->
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    
+  </ros2_control>
+  
+</robot>

@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: s1_description
+    relative_path: urdf/s1_description_with_gripper.urdf
+  srdf:
+    relative_path: config/s1_description.srdf
+  package_settings:
+    author_name: theseus
+    author_email: 12345678@qq.com
+    generated_timestamp: 1770452722
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

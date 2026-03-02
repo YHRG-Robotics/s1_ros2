@@ -1,0 +1,9 @@
+# Default initial positions for s1_description's ros2_control fake system
+
+initial_positions:
+  1joint: 0
+  2joint: 0
+  3joint: 0
+  4joint: 0
+  5joint: 0
+  6joint: 0
