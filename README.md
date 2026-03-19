@@ -55,13 +55,6 @@ sudo apt install gazebo ros-humble-gazebo-ros-pkgs
 │   │       ├── s1_description_with_gripper.urdf    # 带夹爪的模型
 │   │       └── s1_description_no_gripper.urdf      # 无夹爪的模型
 │   │
-│   ├── s1_sdk/                  # C++ SDK 控制节点
-│   │   ├── src/
-│   │   │   ├── arm_node.cpp     # 机械臂控制节点实现
-│   │   │   └── main.cpp         # 主程序入口
-│   │   └── launch/
-│   │       └── s1_sdk.launch.py # SDK 启动文件
-│   │
 │   ├── s1_python/               # Python 控制节点
 │   │   └── s1_python/
 │   │       └── s1_python.py     # Python 机械臂控制实现
