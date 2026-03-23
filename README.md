@@ -4,7 +4,7 @@
 
 ---
 ## 使用准备
-- 需提前安装S1本体机械臂SDK，参考[这里](https://github.com/YHRG-Robotics/S1_SDK)
+- 需提前安装S1本体机械臂SDK，参考[这里](https://github.com/YHRG-Robotics/S1_SDK_V2)
 ---
 
 ---
@@ -132,7 +132,7 @@ sudo chmod 777 /dev/ttyUSB0
 ```
 
 ```bash
-self.arm = S1_arm(mode=control_mode.only_sim,dev="/dev/ttyUSB0",end_effector="gripper")
+self.arm = S1_arm(mode=control_mode.only_real,dev="/dev/ttyUSB0",end_effector="gripper")
 ```
 
 ```bash
@@ -162,22 +162,6 @@ ros2 topic pub /s1/joint_cmd sensor_msgs/msg/JointState \
 "{position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}" -1
 ```
 
-#### 发布末端位姿指令
-- 一定要注意求解的结果，尤其在近原点处求解的突变，使用注意安全，可以先仿真或者SDK查看求解结果
-```bash
-ros2 topic pub --once /s1/pose_cmd geometry_msgs/msg/Pose "
-position:
-  x: -0.2
-  y: 0.0
-  z: 0.3
-orientation:
-  x: 0.5
-  y: -0.5
-  z: -0.5
-  w: 0.5
-"
-```
-
 #### 发送夹爪控制指令
 
 ```bash
@@ -185,6 +169,21 @@ ros2 topic pub /s1/gripper_cmd control_msgs/msg/GripperCommand \
 "{position: 0.0, max_effort: 0.5}" -1
 ```
 
+#### 发布末端位姿指令
+- 一定要注意求解的结果，尤其在近原点处求解的突变，使用注意安全，可以先仿真或者SDK查看求解结果,注意目标位置与当前位置差距较远时，直接发布指令会导致机械臂冲击惯量很大。
+```bash
+ros2 topic pub --once /s1/pose_cmd geometry_msgs/msg/Pose "
+position:
+  x: -0.2
+  y: 0.0
+  z: 0.3
+orientation:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  w: 1.0
+"
+```
 
 #### 查看实时反馈
 
