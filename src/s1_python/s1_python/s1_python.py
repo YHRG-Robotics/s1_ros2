@@ -10,13 +10,14 @@ from control_msgs.action import FollowJointTrajectory
 import threading
 import time
 
-from S1_SDK import S1_arm,control_mode
+from S1_SDK import S1_arm,control_mode,S1_slover
 
 class S1_python_Publisher(Node):
     def __init__(self):
         super().__init__('s1_python_publisher')
         self._logger.info('S1_python_Publisher 节点已初始化')
         self.arm = S1_arm(mode=control_mode.only_real,dev="/dev/ttyUSB0",end_effector="gripper")
+        self.solver = S1_slover([0.0,0.0,0.0])
 
         # ================= Publisher =================
         self.joint_pub = self.create_publisher(JointState, 's1/joint_states', 10)
@@ -58,7 +59,6 @@ class S1_python_Publisher(Node):
 
         while rclpy.ok():
             # 读取关节状态
-            self.arm.refresh()
             pos = self.arm.get_pos()
             tau = self.arm.get_tau()
             vel = self.arm.get_vel()
@@ -74,7 +74,7 @@ class S1_python_Publisher(Node):
                 self.joint_pub.publish(self.joint_msg)
 
                 # FK 计算末端位姿
-                fk = self.arm.get_fk_quat(pos[:6])
+                fk = self.solver.forward_quat(pos[:6])
 
                 if fk is not None:
                     x, y, z, qx, qy, qz, qw = fk
@@ -127,7 +127,7 @@ class S1_python_Publisher(Node):
 
         self.get_logger().info(f"Pose cmd: {x:.3f},{y:.3f},{z:.3f}")
 
-        ik_sol = self.arm.get_ik_quat([x, y, z, qx, qy, qz, qw])
+        ik_sol = self.solver.inverse_quat([x, y, z, qx, qy, qz, qw])
         if ik_sol is not None:
             self.get_logger().info(f"Pose sol: {[f'{x:.2f}' for x in ik_sol]}")
             self.arm.joint_control(ik_sol)
