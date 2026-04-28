@@ -10,14 +10,14 @@ from control_msgs.action import FollowJointTrajectory
 import threading
 import time
 
-from S1_SDK import S1_arm,control_mode,S1_slover
+from S1_SDK import S1_arm,control_mode,S1_solver
 
 class S1_python_Publisher(Node):
     def __init__(self):
         super().__init__('s1_python_publisher')
         self._logger.info('S1_python_Publisher 节点已初始化')
         self.arm = S1_arm(mode=control_mode.only_real,dev="/dev/ttyUSB0",end_effector="gripper")
-        self.solver = S1_slover([0.0,0.0,0.0])
+        self.solver = S1_solver([0.0,0.0,0.0])
 
         # ================= Publisher =================
         self.joint_pub = self.create_publisher(JointState, 's1/joint_states', 10)
@@ -174,7 +174,6 @@ class S1_python_Publisher(Node):
                     time.sleep(sleep_time)
                 last_time = current_time
 
-                self.arm.refresh()
                 self.arm.joint_control(pos_list)
 
                 js_msg = JointState()
@@ -210,4 +209,4 @@ def main(args=None):
     finally:
         node.arm.disable()
         node.destroy_node()
-        rclpy.shutdown()
+        # rclpy.shutdown()

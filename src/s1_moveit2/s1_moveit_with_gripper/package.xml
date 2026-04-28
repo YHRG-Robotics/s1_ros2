@@ -4,7 +4,7 @@
   <name>s1_moveit_with_gripper</name>
   <version>0.3.0</version>
   <description>
-     An automatically generated package with all the configuration and launch files for using the s1_description with the MoveIt Motion Planning Framework
+     An automatically generated package with all the configuration and launch files for using the S1_urdf with the MoveIt Motion Planning Framework
   </description>
   <maintainer email="12345678@qq.com">theseus</maintainer>
 

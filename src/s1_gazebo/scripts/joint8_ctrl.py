@@ -31,10 +31,10 @@ class GripperMirrorController(Node):
     def joint_state_callback(self, msg):
         try:
             # 找到 joint7 的索引
-            joint_index = msg.joint_names.index("gripper_joint")
-            # print(f"gripper_joint index: {joint_index}")
+            joint_index = msg.joint_names.index("7_1_joint")
+            # print(f"7_1_joint index: {joint_index}")
             self.joint7_position = msg.reference.positions[joint_index]
-            # print(f"gripper_joint position: {self.joint7_position}")
+            # print(f"7_1_joint position: {self.joint7_position}")
 
         except ValueError:
             self.get_logger().warn("joint7 not found in /gripper_controller/state")
@@ -46,7 +46,7 @@ class GripperMirrorController(Node):
 
             # 创建 JointTrajectory 消息
             traj_msg = JointTrajectory()
-            traj_msg.joint_names = ["gripper_joint_2"]
+            traj_msg.joint_names = ["7_2_joint"]
 
             # 设定轨迹点
             point = JointTrajectoryPoint()

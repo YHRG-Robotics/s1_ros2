@@ -38,13 +38,13 @@ joint_limits:
     max_velocity: 3.0
     has_acceleration_limits: false
     max_acceleration: 0.0
-  gripper_joint:
+  7_1_joint:
     has_velocity_limits: true
-    max_velocity: 1.0
+    max_velocity: 3.0
     has_acceleration_limits: false
     max_acceleration: 0.0
-  gripper_joint_2:
-    has_velocity_limits: true
-    max_velocity: 1.0
-    has_acceleration_limits: false
-    max_acceleration: 0.0
+  # 7_2_joint:
+  #   has_velocity_limits: true
+  #   max_velocity: 3.0
+  #   has_acceleration_limits: false
+  #   max_acceleration: 0.0

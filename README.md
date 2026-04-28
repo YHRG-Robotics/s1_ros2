@@ -174,9 +174,9 @@ ros2 topic pub /s1/gripper_cmd control_msgs/msg/GripperCommand \
 ```bash
 ros2 topic pub --once /s1/pose_cmd geometry_msgs/msg/Pose "
 position:
-  x: -0.2
-  y: 0.0
-  z: 0.3
+  x: x
+  y: y
+  z: z
 orientation:
   x: 0.0
   y: 0.0
